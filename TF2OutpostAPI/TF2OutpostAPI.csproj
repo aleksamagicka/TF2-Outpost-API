@@ -11,9 +11,9 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Aleksa Savić</Authors>
     <Company />
-    <PackageProjectUrl>https://github.com/aragornman/TF2-Outpost-API</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/aragornman/TF2-Outpost-API/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/aragornman/TF2-Outpost-API</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/aleksasteam/TF2-Outpost-API</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/aleksasteam/TF2-Outpost-API/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/aleksasteam/TF2-Outpost-API</RepositoryUrl>
     <PackageReleaseNotes>Parsing trades and pages works.</PackageReleaseNotes>
     <SignAssembly>False</SignAssembly>
     <Version>1.2.4</Version>
