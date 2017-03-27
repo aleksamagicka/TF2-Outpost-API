@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("TF2 Outpost API")]
-[assembly: AssemblyDescription("This library provides easy interaction with the TF2Outpost.com website.")]
+[assembly: AssemblyDescription("Easily interact with the TF2Outpost.com website.")]
 [assembly: AssemblyProduct("TF2 Outpost API")]
 [assembly: AssemblyCopyright("Copyright Aleksa Savić 2017")]
 
