@@ -11,7 +11,7 @@ namespace Console
             {
                 var api = new TF2Outpost.API();
                 Trade trade = api.ParseTrade(tradeID).Result; // Use await in ideal conditions
-                System.Console.WriteLine(JsonConvert.SerializeObject(trade, Formatting.Indented));       
+                System.Console.WriteLine(JsonConvert.SerializeObject(trade, Formatting.Indented));
             }
             else
             {

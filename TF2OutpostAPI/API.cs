@@ -14,11 +14,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TF2OutpostAPI.Models;
 
@@ -28,33 +32,33 @@ namespace TF2Outpost
     [SuppressMessage("ReSharper", "TooWideLocalVariableScope")]
     public class API
     {
-        private readonly HttpClient client;
+        private readonly HttpClient Client;
+        private readonly HttpClient SearchClient;
 
         /// <summary>
         /// Initializes TF2 Outpost API with a preconfigured HttpClient.
         /// </summary>
         public API()
         {
-            client = new HttpClient(new HttpClientHandler
+            Client = new HttpClient(new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
             });
 
-            client.DefaultRequestHeaders.Add("User-Agent",
-                "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
-            client.DefaultRequestHeaders.Add("Accept",
-                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-        }
+            SearchClient = new HttpClient(new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
+            });
 
-        /// <summary>
-        /// Initializes TF2 Outpost API with a custom HttpClient.
-        /// </summary>
-        /// <param name="client">Custom HttpClient instance to use.</param>
-        public API(HttpClient client)
-        {
-            this.client = client;
+            Client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0");
+            Client.DefaultRequestHeaders.Add("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            Client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
+            Client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+
+            SearchClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0");
+            SearchClient.DefaultRequestHeaders.Add("Accept", "application/json, text/javascript, */*; q=0.01");
+            SearchClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
+            SearchClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
         }
 
         /// <summary>
@@ -68,7 +72,7 @@ namespace TF2Outpost
 
             var tf2OutpostTrade = new HtmlDocument();
 
-            tf2OutpostTrade.LoadHtml(await client.GetStringAsync(new Uri("http://www.tf2outpost.com/trade/" + tradeID)));
+            tf2OutpostTrade.LoadHtml(await Client.GetStringAsync(new Uri("http://www.tf2outpost.com/trade/" + tradeID)));
 
             return await ParseTrade(tradeID, tf2OutpostTrade);
         }
@@ -79,6 +83,7 @@ namespace TF2Outpost
         /// <param name="tradeID"></param>
         /// <param name="tf2OutpostTrade"></param>
         /// <returns>A Trade instance filled with extracted data.</returns>
+        // ReSharper disable once MemberCanBePrivate.Global
         public async Task<Trade> ParseTrade(ulong tradeID, HtmlDocument tf2OutpostTrade)
         {
             if (tf2OutpostTrade.DocumentNode.InnerHtml.Contains("does not exist"))
@@ -136,6 +141,8 @@ namespace TF2Outpost
 
                     if (time != null) timeOfClosing = DateTime.Parse(time);
                 }
+
+                closedTradeNotification += " " + reasonForClosing;
             }
 
             var tradeStats = tf2OutpostTrade.DocumentNode.SelectSingleNode("//div[contains(@class, 'trade-post-stats col-md-6')]");
@@ -331,7 +338,7 @@ namespace TF2Outpost
 
             do
             {
-                doc.LoadHtml(await client.GetStringAsync(new Uri(URL + pageID + "," + pageCounter)));
+                doc.LoadHtml(await Client.GetStringAsync(new Uri(URL + pageID + "," + pageCounter)));
 
                 if (userPage && doc.DocumentNode.InnerText.Contains("never made a trade"))
                     break;
@@ -359,16 +366,34 @@ namespace TF2Outpost
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns>A SearchResult instance filled with extracted results.</returns>
-        //public async Task<SearchResults> Search(string keyword)
-        //{
-        /*
-           TODO: Implement Search!
+        public async Task<SearchResults> Search(string keyword)
+        {
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://www.tf2outpost.com/api/core");
 
-           POST to http://www.tf2outpost.com/api/core/ with BODY = query=KEYWORD&action=header.search&hash=
-           with Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+            request.Content = new StringContent($"query={keyword}&action=header.search&hash=");
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            request.Headers.Host = "www.tf2outpost.com";
 
-           Hash parameter is filled only if you are logged in
-        */
-        //}
+            HttpResponseMessage response = await SearchClient.SendAsync(request);
+
+            /*
+             Returned JSON can contain Unicode characters, such as emoticons
+
+             We can't do response.Content.ReadAsStringAsync(), it throws because of incorrect formatting
+            */
+
+            Stream receiveStream = await response.Content.ReadAsStreamAsync();
+            StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+            string json = readStream.ReadToEnd();
+
+            var result = JsonConvert.DeserializeObject<SearchResults>(json);
+
+            if (result.Meta.Code != 200)
+            {
+                throw new HttpRequestException(nameof(result.Meta.Code) + " was different than 200 OK.");
+            }
+
+            return result;
+        }
     }
 }
