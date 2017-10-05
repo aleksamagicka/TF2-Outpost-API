@@ -15,4 +15,4 @@ Trade tradeInfo = await tf2OutpostAPI.FetchTrade(1);
 ```
 
 ## TODO
-Interacting with trades (reopening, closing, commenting) and probably search.
+Interacting with trades (reopening, closing, commenting).
