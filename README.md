@@ -10,9 +10,9 @@ This library supports .NET Core (.NET Standard 1.6.1).
 var tf2OutpostAPI = new TF2Outpost.API();
 Trade tradeInfo = await tf2OutpostAPI.FetchTrade(1);
 
-// All trade information is now in the tradeInfo object.
+// All information about trade with id 1 is now in the tradeInfo object.
 // Use it however you wish.
 ```
 
 ## TODO
-Interacting with trades (reopening, closing, commenting).
+Interacting with trades ((re)opening, closing, commenting).
