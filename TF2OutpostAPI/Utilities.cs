@@ -14,7 +14,7 @@ using System;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
-using TF2OutpostAPI.Models;
+using TF2Outpost.Models;
 
 // ReSharper disable once CheckNamespace
 namespace TF2Outpost

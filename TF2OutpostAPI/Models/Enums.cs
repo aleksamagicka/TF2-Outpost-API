@@ -14,7 +14,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace TF2OutpostAPI.Models
+namespace TF2Outpost.Models
 {
     public class Enums
     {

@@ -17,9 +17,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("TF2 Outpost API")]
+[assembly: AssemblyTitle("TF2 Outpost TF2OutpostApi")]
 [assembly: AssemblyDescription("Easily interact with the TF2Outpost.com website.")]
-[assembly: AssemblyProduct("TF2 Outpost API")]
+[assembly: AssemblyProduct("TF2 Outpost TF2OutpostApi")]
 [assembly: AssemblyCopyright("Copyright Aleksa Savić 2017")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TF2OutpostAPI.Models
+namespace TF2Outpost.Models
 {
     public class SearchResults
     {

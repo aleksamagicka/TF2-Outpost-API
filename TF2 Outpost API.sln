@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26127.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TF2OutpostAPI", "TF2OutpostAPI\TF2OutpostAPI.csproj", "{AB2665A7-1C64-455F-968B-E9075C7DDF69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Console\Console.csproj", "{8D392E32-61DD-4348-ADDD-CCF3FC9D8593}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{A1753F7C-5358-45E3-AA95-037F3B03D726}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +17,15 @@ Global
 		{AB2665A7-1C64-455F-968B-E9075C7DDF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2665A7-1C64-455F-968B-E9075C7DDF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2665A7-1C64-455F-968B-E9075C7DDF69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D392E32-61DD-4348-ADDD-CCF3FC9D8593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D392E32-61DD-4348-ADDD-CCF3FC9D8593}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D392E32-61DD-4348-ADDD-CCF3FC9D8593}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D392E32-61DD-4348-ADDD-CCF3FC9D8593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1753F7C-5358-45E3-AA95-037F3B03D726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1753F7C-5358-45E3-AA95-037F3B03D726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1753F7C-5358-45E3-AA95-037F3B03D726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1753F7C-5358-45E3-AA95-037F3B03D726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0F1B797-B26E-4D2E-BAE0-9D4232416265}
 	EndGlobalSection
 EndGlobal

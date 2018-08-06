@@ -1,4 +1,4 @@
-﻿// Copyright 2016-2017 Aleksa Savić
+﻿// Copyright 2016-2018 Aleksa Savić
 // Contact: GitHub@AleksaSavic.com
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,13 +24,13 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TF2OutpostAPI.Models;
+using TF2Outpost.Models;
 
 // ReSharper disable once CheckNamespace
 namespace TF2Outpost
 {
     [SuppressMessage("ReSharper", "TooWideLocalVariableScope")]
-    public class API
+    public class TF2OutpostApi
     {
         private readonly HttpClient Client;
         private readonly HttpClient SearchClient;
@@ -38,7 +38,7 @@ namespace TF2Outpost
         /// <summary>
         /// Initializes TF2 Outpost API with a preconfigured HttpClient.
         /// </summary>
-        public API()
+        public TF2OutpostApi()
         {
             Client = new HttpClient(new HttpClientHandler
             {
