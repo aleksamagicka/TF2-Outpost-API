@@ -1,4 +1,8 @@
 # TF2 Outpost API
+
+## On 11.9.2018. TF2 Outpost announced that is closing down till the end of the month. As a consequence, this library becomes obsolete.
+## Thank you all for using it. [NuGet statistics](https://www.nuget.org/packages/TF2OutpostAPI/)
+
 Easily fetch trades from the TF2Outpost.com website.
 
 ## Usage
@@ -13,6 +17,3 @@ Trade tradeInfo = await tf2OutpostAPI.FetchTrade(1);
 // All information about trade with id 1 is now in the tradeInfo object.
 // Use it however you wish.
 ```
-
-## TODO
-Interacting with trades ((re)opening, closing, commenting).
