@@ -1,11 +1,12 @@
 # TF2 Outpost API
 
-## On 11.9.2018. TF2 Outpost announced that is closing down till the end of the month. As a consequence, this library becomes obsolete.
-## Thank you all for using it. [NuGet statistics](https://www.nuget.org/packages/TF2OutpostAPI/)
+## Deprecation Notice
 
-Easily fetch trades from the TF2Outpost.com website.
+On 11.9.2018. TF2 Outpost announced that is closing down till the end of that month. As a consequence, this library becomes obsolete. [NuGet usage statistics](https://www.nuget.org/packages/TF2OutpostAPI/)
 
 ## Usage
+Easily fetch trades from the TF2Outpost.com website.
+
 This library supports .NET Core 2.0.
 
 1. Install this library via NuGet.
